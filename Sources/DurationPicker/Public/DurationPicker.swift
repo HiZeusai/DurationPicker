@@ -170,7 +170,7 @@ open class DurationPicker: UIControl {
     set { setDuration(newValue, animated: false) }
   }
 
-  private let pickerView = DurationPickerView()
+  private let pickerView = InternalDurationPickerView()
 
   // MARK: - Initializers & View Lifecycle
 

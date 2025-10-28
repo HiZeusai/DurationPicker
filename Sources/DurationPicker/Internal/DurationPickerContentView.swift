@@ -22,7 +22,7 @@
 
 import UIKit
 
-/// A view which displays a single monospaced, right-aligned label. Used as a row for `DurationPickerView`.
+/// A view which displays a single monospaced, right-aligned label. Used as a row for `InternalDurationPickerView`.
 final class DurationPickerContentView: UIView {
 
   private let label: UILabel = {

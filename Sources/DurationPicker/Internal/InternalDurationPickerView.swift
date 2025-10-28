@@ -23,7 +23,7 @@
 import UIKit
 
 /// A subclass of `UIPickerView` which to obfuscates the `UIPickerViewDataSource` and `UIPickerViewDelegate` conformance from the public `DurationPicker` interface.
-final class DurationPickerView: UIPickerView, UIPickerViewDataSource, UIPickerViewDelegate, UIPickerViewAccessibilityDelegate {
+final class InternalDurationPickerView: UIPickerView, UIPickerViewDataSource, UIPickerViewDelegate, UIPickerViewAccessibilityDelegate {
 
   // MARK: - Configuration Properties
 
@@ -158,7 +158,7 @@ final class DurationPickerView: UIPickerView, UIPickerViewDataSource, UIPickerVi
   /// Observed from the view hierarchy of `UIDatePicker` with `countDownTimer` mode.
   private static let contentViewLabelToUnitLabelSpacing: CGFloat = 6
 
-  /// The spacing between the columns in `DurationPickerView`.
+  /// The spacing between the columns in `InternalDurationPickerView`.
   ///
   /// Observed from the view hierarchy of `UIDatePicker with `countDownTimer` mode.
   private static let columnSpacing: CGFloat = 5
@@ -737,3 +737,4 @@ final class DurationPickerView: UIPickerView, UIPickerViewDataSource, UIPickerVi
     }
   }
 }
+
