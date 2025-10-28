@@ -16,6 +16,7 @@ DurationPicker is an iOS library that provides a customizable control for inputt
 ## Features
 
 - [x] Styled to match `UIDatePicker` with `countDownTimer` mode
+- [x] Native SwiftUI support with `DurationPickerView`
 - [x] Multiple modes for selection of hours, minutes, and/or seconds
 - [x] Option to specify intervals for hour, minute, and/or seconds
 - [x] Support for minimum and maximum durations
@@ -24,7 +25,9 @@ DurationPicker is an iOS library that provides a customizable control for inputt
 
 ## Usage
 
-To use DurationPicker, simply create an instance of `DurationPicker` and add it to your view hierarchy. You can customize your picker using the following properties:
+### UIKit
+
+To use DurationPicker in UIKit, simply create an instance of `DurationPicker` and add it to your view hierarchy. You can customize your picker using the following properties:
 
 - `pickerMode`: The mode of the picker, determines whether the duration picker allows selection of hours, minutes, and/or seconds
 - `{hour|minute|second}Interval`: The intervals at which the duration picker should display
@@ -68,6 +71,43 @@ let action = UIAction { [weak picker] _ in
 for: .primaryAction)
     
 picker.addAction(action)
+```
+
+### SwiftUI
+
+For SwiftUI, use `DurationPickerView` which provides a native SwiftUI interface.
+
+```swift
+import SwiftUI
+import DurationPicker
+
+struct ContentView: View {
+    @State private var duration: TimeInterval = 1830 // 30 minutes, 30 seconds
+    
+    var body: some View {
+        VStack {
+            DurationPickerView(
+                duration: $duration,
+                pickerMode: .minuteSecond
+            )
+            .minimumDuration(15 * 60) // 15 minutes
+            .maximumDuration((45 * 60) + 30) // 45 minutes, 30 seconds
+            .minuteInterval(5)
+            .secondInterval(30)
+            
+            Text("Selected: \(Int(duration)) seconds")
+        }
+    }
+}
+```
+
+You can also use a more concise syntax:
+
+```swift
+DurationPickerView(duration: $duration)
+    .durationPickerMode(.hourMinuteSecond)
+    .minimumDuration(0)
+    .maximumDuration(3600)
 ```
 
 ## Demo
