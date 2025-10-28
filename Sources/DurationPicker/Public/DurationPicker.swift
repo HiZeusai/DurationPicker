@@ -169,6 +169,34 @@ open class DurationPicker: UIControl {
     get { TimeInterval(pickerView.duration) }
     set { setDuration(newValue, animated: false) }
   }
+  
+  /// The color to use for the text in the duration picker.
+  ///
+  /// Use this property to customize the color of the time values and unit labels displayed in the duration picker. The default value is `UIColor.label`, which adapts to the user's interface style (dark or light mode).
+  ///
+  /// Example:
+  /// ```swift
+  /// let picker = DurationPicker()
+  /// picker.textColor = .systemBlue
+  /// ```
+  public var textColor: UIColor {
+    get { pickerView.textColor }
+    set { pickerView.textColor = newValue }
+  }
+  
+  /// The color to use for muted text in the duration picker.
+  ///
+  /// Use this property to customize the color of disabled or out-of-range time values in the duration picker. The default value is `UIColor.tertiaryLabel`, which provides a muted appearance and adapts to the user's interface style.
+  ///
+  /// Example:
+  /// ```swift
+  /// let picker = DurationPicker()
+  /// picker.mutedTextColor = .systemGray
+  /// ```
+  public var mutedTextColor: UIColor {
+    get { pickerView.mutedTextColor }
+    set { pickerView.mutedTextColor = newValue }
+  }
 
   private let pickerView = InternalDurationPickerView()
 

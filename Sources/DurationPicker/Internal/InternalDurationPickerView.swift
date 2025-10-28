@@ -95,6 +95,25 @@ final class InternalDurationPickerView: UIPickerView, UIPickerViewDataSource, UI
   }
 
   private var internalHourInterval: Int = 1
+  
+  // MARK: - Text Color Properties
+  
+  /// The color to use for the text.
+  var textColor: UIColor = .label {
+    didSet {
+      hourUnitLabel.textColor = textColor
+      minuteUnitLabel.textColor = textColor
+      secondUnitLabel.textColor = textColor
+      reloadAllComponents()
+    }
+  }
+  
+  /// The color to use for muted text.
+  var mutedTextColor: UIColor = .tertiaryLabel {
+    didSet {
+      reloadAllComponents()
+    }
+  }
 
   // MARK: - Layout Properties
 
@@ -176,6 +195,7 @@ final class InternalDurationPickerView: UIPickerView, UIPickerViewDataSource, UI
   private static func makeUnitLabel() -> UILabel {
     let label = UILabel()
     label.font = unitLabelFont
+    label.textColor = .label
     label.isOpaque = false
     return label
   }
@@ -476,6 +496,10 @@ final class InternalDurationPickerView: UIPickerView, UIPickerViewDataSource, UI
                   forComponent component: Int,
                   reusing view: UIView?) -> UIView {
     let contentView = view as? DurationPickerContentView ?? DurationPickerContentView()
+    
+    // Apply text colors to the content view
+    contentView.textColor = textColor
+    contentView.mutedTextColor = mutedTextColor
 
     guard let componentType = pickerMode.componentType(fromComponent: component) else {
       return contentView

@@ -95,6 +95,12 @@ public struct DurationPickerView: UIViewRepresentable {
     /// The interval at which the duration picker should display seconds.
     public var secondInterval: Int
     
+    /// The color to use for the text in the duration picker.
+    public var textColor: UIColor
+    
+    /// The color to use for muted text in the duration picker.
+    public var mutedTextColor: UIColor
+    
     /// Creates a new duration picker view.
     ///
     /// - Parameters:
@@ -107,7 +113,9 @@ public struct DurationPickerView: UIViewRepresentable {
         maximumDuration: TimeInterval? = nil,
         hourInterval: Int = 1,
         minuteInterval: Int = 1,
-        secondInterval: Int = 1
+        secondInterval: Int = 1,
+        textColor: UIColor = .label,
+        mutedTextColor: UIColor = .tertiaryLabel
     ) {
         self._duration = duration
         self.pickerMode = pickerMode
@@ -116,6 +124,8 @@ public struct DurationPickerView: UIViewRepresentable {
         self.hourInterval = hourInterval
         self.minuteInterval = minuteInterval
         self.secondInterval = secondInterval
+        self.textColor = textColor
+        self.mutedTextColor = mutedTextColor
     }
     
     public func makeUIView(context: Context) -> DurationPicker {
@@ -133,6 +143,8 @@ public struct DurationPickerView: UIViewRepresentable {
         picker.hourInterval = hourInterval
         picker.minuteInterval = minuteInterval
         picker.secondInterval = secondInterval
+        picker.textColor = textColor
+        picker.mutedTextColor = mutedTextColor
         
         // Set up action handler
         picker.addAction(
@@ -178,6 +190,14 @@ public struct DurationPickerView: UIViewRepresentable {
         }
         if picker.secondInterval != secondInterval {
             picker.secondInterval = secondInterval
+        }
+        
+        // Update colors
+        if picker.textColor != textColor {
+            picker.textColor = textColor
+        }
+        if picker.mutedTextColor != mutedTextColor {
+            picker.mutedTextColor = mutedTextColor
         }
     }
 }
@@ -244,6 +264,26 @@ extension DurationPickerView {
     public func secondInterval(_ interval: Int) -> DurationPickerView {
         var view = self
         view.secondInterval = interval
+        return view
+    }
+    
+    /// Sets the color to use for the text in the duration picker.
+    ///
+    /// - Parameter color: The color for the time values and unit labels.
+    /// - Returns: A modified duration picker view.
+    public func textColor(_ color: UIColor) -> DurationPickerView {
+        var view = self
+        view.textColor = color
+        return view
+    }
+    
+    /// Sets the color to use for muted text in the duration picker.
+    ///
+    /// - Parameter color: The color for disabled or out-of-range time values.
+    /// - Returns: A modified duration picker view.
+    public func mutedTextColor(_ color: UIColor) -> DurationPickerView {
+        var view = self
+        view.mutedTextColor = color
         return view
     }
 }

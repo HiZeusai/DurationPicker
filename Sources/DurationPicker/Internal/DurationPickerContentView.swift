@@ -31,6 +31,23 @@ final class DurationPickerContentView: UIView {
     label.font = labelFont
     return label
   }()
+  
+  /// The color to use for the label text.
+  var textColor: UIColor = .label {
+    didSet {
+      updateLabelColor()
+    }
+  }
+  
+  /// The color to use for muted label text.
+  var mutedTextColor: UIColor = .tertiaryLabel {
+    didSet {
+      updateLabelColor()
+    }
+  }
+  
+  /// Indicates whether the label is currently muted.
+  private var isMuted: Bool = false
 
   /// The font of the label.
   ///
@@ -72,8 +89,14 @@ final class DurationPickerContentView: UIView {
                muted: Bool,
                accessibilityLabel: String?) {
     label.text = text
-    label.textColor = muted ? .tertiaryLabel : .label
+    isMuted = muted
+    updateLabelColor()
     label.accessibilityLabel = accessibilityLabel
+  }
+  
+  /// Updates the label color based on the muted state.
+  private func updateLabelColor() {
+    label.textColor = isMuted ? mutedTextColor : textColor
   }
 
   /// Returns the bounding rectangle for the label in the content view, rounded up to the nearest pixel.
