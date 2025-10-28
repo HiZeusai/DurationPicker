@@ -102,15 +102,20 @@ public struct DurationPickerView: UIViewRepresentable {
     ///   - pickerMode: The mode of the duration picker. Defaults to `.hourMinuteSecond`.
     public init(
         duration: Binding<TimeInterval>,
-        pickerMode: DurationPicker.Mode = .hourMinuteSecond
+        pickerMode: DurationPicker.Mode = .hourMinuteSecond,
+        minimumDuration: TimeInterval? = nil,
+        maximumDuration: TimeInterval? = nil,
+        hourInterval: Int = 1,
+        minuteInterval: Int = 1,
+        secondInterval: Int = 1
     ) {
         self._duration = duration
         self.pickerMode = pickerMode
-        self.minimumDuration = nil
-        self.maximumDuration = nil
-        self.hourInterval = 1
-        self.minuteInterval = 1
-        self.secondInterval = 1
+        self.minimumDuration = minimumDuration
+        self.maximumDuration = maximumDuration
+        self.hourInterval = hourInterval
+        self.minuteInterval = minuteInterval
+        self.secondInterval = secondInterval
     }
     
     public func makeUIView(context: Context) -> DurationPicker {
